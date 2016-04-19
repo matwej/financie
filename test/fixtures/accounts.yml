@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  warning_limit: 9.99
+  notified: false
+  user_id: 
+
+two:
+  name: MyString
+  warning_limit: 9.99
+  notified: false
+  user_id: 
