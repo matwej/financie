@@ -23,6 +23,19 @@ sk:
   logout: 'Odhlásiť'
   no_results: 'Neboli nájdené žiadne záznamy'
 
+  activerecord:
+    attributes:
+      account:
+        name: 'Názov'
+        warning_limit: 'Kritická hodnota'
+        notified: 'Posielanie notifikácie'
+    errors:
+      models:
+        account:
+          attributes:
+            name:
+              blank: ' musí byť vyplnený.'
+
   time:
      input:
        formats:

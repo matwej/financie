@@ -45,7 +45,7 @@ class Logged::AccountsController < LoggedController
   def update
     respond_to do |format|
       if @account.update(account_params)
-        format.html { redirect_to @account, notice: 'Account was successfully updated.' }
+        format.html { redirect_to accounts_path, notice: 'Účet bol úspešne upravený.' }
         format.json { render :show, status: :ok, location: @account }
       else
         format.html { render :edit }

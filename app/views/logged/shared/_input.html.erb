@@ -1,0 +1,8 @@
+<% unless defined? required %>
+    <% required = false %>
+<% end %>
+
+<div class="form-group">
+  <%= form.label value, class: "control-label #{'required' if required}" %>
+  <%= form.text_field value, class: "form-control", required: required %>
+</div>

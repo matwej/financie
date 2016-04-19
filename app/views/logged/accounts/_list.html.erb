@@ -19,6 +19,7 @@
             <td>
               <div class="pull-right">
                 <%= link_to 'Detail', o, class: "btn btn-sm btn-primary" %>
+                <%= link_to 'Upraviť', edit_account_path(o), remote: true, class: "btn btn-sm btn-primary" %>
                 <%= link_to 'Vymazať', o, method: :delete, class: "btn btn-sm btn-danger", data: {confirm: 'Ste si istý?'} %>
               </div>
             </td>
