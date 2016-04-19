@@ -1,0 +1,31 @@
+<% unless smart_listing.empty? %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Názov</th>
+        <th>Počet transakcii</th>
+        <th>Kritická hodnota</th>
+        <th>Notifikácia</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% smart_listing.collection.each do |o| %>
+          <tr>
+            <td><%= o.name %></td>
+            <td><%= o.transactions.count %></td>
+            <td><%= number_to_human o.warning_limit %></td>
+            <td><%= o.notified ? 'Áno' : 'Nie' %></td>
+            <td>
+              <div class="pull-right">
+                <%= link_to 'Detail', o, class: "btn btn-sm btn-primary" %>
+                <%= link_to 'Vymazať', o, method: :delete, class: "btn btn-sm btn-danger", data: {confirm: 'Ste si istý?'} %>
+              </div>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <%= render partial: 'logged/shared/no_records' %>
+<% end %>

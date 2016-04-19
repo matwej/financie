@@ -1,33 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<h2>Prehľad účtov</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Warning limit</th>
-      <th>Notified</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @accounts.each do |account| %>
-      <tr>
-        <td><%= account.name %></td>
-        <td><%= account.warning_limit %></td>
-        <td><%= account.notified %></td>
-        <td><%= account.user %></td>
-        <td><%= link_to 'Show', account %></td>
-        <td><%= link_to 'Edit', edit_account_path(account) %></td>
-        <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Account', new_account_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-7">
+        <h4>Prehľad účtov</h4>
+      </div>
+      <div class="col-md-5">
+        <%= link_to 'Nový účet', new_account_path, class: "btn btn-sm btn-primary pull-right" %>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <%= smart_listing_render(:accounts) %>
+  </div>
+</div>

@@ -21,6 +21,7 @@
 
 sk:
   logout: 'Odhlásiť'
+  no_results: 'Neboli nájdené žiadne záznamy'
 
   time:
      input:

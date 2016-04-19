@@ -4,7 +4,10 @@ class Logged::AccountsController < LoggedController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    accounts = current_user.accounts
+
+    smart_listing_create :accounts, accounts, partial: "accounts/list",
+                         sort_attributes: [[:account_id, "accounts.id"]], default_sort: {account_id: 'asc'}
   end
 
   # GET /accounts/1
