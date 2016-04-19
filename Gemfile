@@ -29,6 +29,8 @@ gem 'font-awesome-rails'
 
 gem 'devise'
 
+gem 'smart_listing'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
