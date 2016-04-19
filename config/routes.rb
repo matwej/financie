@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   scope '/logged', module: 'logged' do
     get 'dashboard/index'
+    get 'dashboard/logins'
     resources :transactions
     resources :accounts
     resources :categories

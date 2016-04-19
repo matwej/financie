@@ -1,1 +1,9 @@
-welcome
+<h2>
+  Pre používanie aplikácie sa prosím prihláste. <br>
+  V systéme je registrovaných <%= User.count %> používateľov.
+</h2>
+<% if user_signed_in? %>
+    <%= link_to('Aplikácia', logged_root_path, class: "btn btn-primary") %>
+<% else %>
+    <%= link_to('Login', new_user_session_path, class: "btn btn-primary") %>
+<% end %>

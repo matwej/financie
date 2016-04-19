@@ -2,22 +2,23 @@
 <html>
 <head>
   <title>Innovatrics</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if user_signed_in? %>
-    <li>
-      <%= link_to('Aplikácia', logged_root_path) %>
-    </li>
-<% else %>
-    <li>
-      <%= link_to('Login', new_user_session_path)  %>
-    </li>
-<% end %>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<%= yield %>
+<div class="container text-center">
+  <% if notice %>
+      <div class="alert alert-info"><%= notice %></div>
+  <% end %>
+  <% if alert %>
+      <div class="alert alert-danger"><%= alert %></div>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 text-center">
+    <%= yield %>
+  </div>
+</div>
 </body>
 </html>

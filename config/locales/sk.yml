@@ -20,4 +20,23 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 sk:
-  hello: "Hello world"
+  logout: 'Odhlásiť'
+
+  time:
+     input:
+       formats:
+        - :default
+        - :long
+        - :short
+     formats:
+       default: "%H:%M"
+       long: "%d.%m.%Y %H:%M"
+       short: "%d.%m.%Y"
+
+  date:
+    input:
+      formats:
+        - :default
+    formats:
+      default: "%d.%m.%Y"
+      long: "%d.%m.%Y %H:%M"

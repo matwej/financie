@@ -2,31 +2,69 @@
 <html>
 <head>
   <title>Innovatrics</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<div class="row">
-  <div class="col-lg-2">
-    menu
-  </div>
-  <div class="col-lg-10">
-    <div class="row">
-      header
-      <% if user_signed_in? %>
-          <li>
-            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-          </li>
-      <% end %>
+<div class="container">
+  <div class="row clearfix">&nbsp;</div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Aplikácia</h2>
     </div>
-    <div class="row">
+    <div class="col-md-4">
+      <div class="pull-right text-right">
+      <% if user_signed_in? %>
+          <%= link_to(t('logout'), destroy_user_session_path, :method => :delete, class: "btn btn-sm btn-primary") %>
+      <% end %>
+      <br>
+        <small><strong>posledné prihlásenie: </strong><%= l current_user.last_sign_in_at, format: :long %></small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row clearfix">&nbsp;</div>
+
+  <div class="row">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <%= link_to 'Menu', dashboard_index_path, class: "navbar-brand" %>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="<%= "active" if params[:controller] == "logged/dashboard" && params[:action] == "index" %>">
+            <%= link_to 'Nástenka', dashboard_index_path %>
+          </li>
+          <li class="<%= "active" if params[:controller] == "logged/accounts" %>">
+            <%= link_to 'Účty', accounts_path %>
+          </li>
+          <li class="<%= "active" if params[:controller] == "logged/categories" %>">
+            <%= link_to 'Kategórie', categories_path %>
+          </li>
+          <li class="<%= "active" if params[:controller] == "logged/dashboard" && params[:action] == "logins" %>">
+            <%= link_to 'Prístupy', dashboard_logins_path %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    </div>
+
+  <div class="row clearfix">&nbsp;</div>
+
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <% if notice %>
+          <div class="alert alert-info"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+          <div class="alert alert-danger"><%= alert %></div>
+      <% end %>
       <%= yield %>
     </div>
   </div>
-</div>
 
+</div>
 </body>
 </html>
