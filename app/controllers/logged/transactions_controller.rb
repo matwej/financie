@@ -1,4 +1,4 @@
-class TransactionsController < ApplicationController
+class Logged::TransactionsController < LoggedController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /transactions

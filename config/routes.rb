@@ -1,16 +1,22 @@
 Rails.application.routes.draw do
-  get 'dashboard/index'
 
+  get 'application/welcome', to: 'application#welcome', as: 'welcome'
+  root 'application#welcome'
   devise_for :users
-  resources :transactions
-  resources :accounts
-  resources :categories
-  resources :users
+
+  scope '/logged', module: 'logged' do
+    get 'dashboard/index'
+    resources :transactions
+    resources :accounts
+    resources :categories
+    resources :users
+
+    root 'dashboard#index', as: 'logged_root'
+  end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  root 'dashboard#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
