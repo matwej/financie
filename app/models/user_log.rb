@@ -1,7 +1,7 @@
 class UserLog < ActiveRecord::Base
   belongs_to :user
 
-  enum actions: %w{login logout session_expired relogged}
+  enum actions: %w{login logout session_expired other_browser_login}
 
   validates :action, inclusion: {in: actions, message: '%{value} nie je akcia'}
 

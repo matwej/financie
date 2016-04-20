@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
     self.log_action :session_expired if res
     res
   end
+
+  def update_unique_session_id!(unique_session_id)
+    self.update_attribute(:unique_session_id, unique_session_id)
+  end
 end
