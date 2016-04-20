@@ -28,14 +28,13 @@ class Logged::AccountsController < LoggedController
   # POST /accounts.json
   def create
     @account = Account.new(account_params)
+    @account.user = current_user
 
     respond_to do |format|
       if @account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render :show, status: :created, location: @account }
+        format.html { redirect_to @account, notice: 'Účet bol úspešne vytvorený.' }
       else
         format.html { render :new }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,10 +45,8 @@ class Logged::AccountsController < LoggedController
     respond_to do |format|
       if @account.update(account_params)
         format.html { redirect_to accounts_path, notice: 'Účet bol úspešne upravený.' }
-        format.json { render :show, status: :ok, location: @account }
       else
         format.html { render :edit }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,8 +56,7 @@ class Logged::AccountsController < LoggedController
   def destroy
     @account.destroy
     respond_to do |format|
-      format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to accounts_url, notice: 'Účet bol úspešne odstránený.' }
     end
   end
 
@@ -72,6 +68,6 @@ class Logged::AccountsController < LoggedController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:name, :warning_limit, :notified, :user_id)
+      params.require(:account).permit(:name, :warning_limit, :notified)
     end
 end

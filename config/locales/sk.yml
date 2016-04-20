@@ -29,12 +29,22 @@ sk:
         name: 'Názov'
         warning_limit: 'Kritická hodnota'
         notified: 'Posielanie notifikácie'
+      category:
+        name: 'Názov'
     errors:
       models:
         account:
           attributes:
             name:
               blank: ' musí byť vyplnený.'
+        category:
+          attributes:
+            name:
+              blank: ' musí byť vyplnený.'
+
+  views:
+    pagination:
+      total: 'Spolu'
 
   time:
      input:

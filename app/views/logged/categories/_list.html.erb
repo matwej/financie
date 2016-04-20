@@ -1,0 +1,21 @@
+<% unless smart_listing.empty? %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th><%= smart_listing.sortable 'Názov', :name %></th>
+        <th>Počet transakcii</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% smart_listing.collection.each do |o| %>
+          <%= render partial: 'logged/categories/list_row', locals:  {object: o}%>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= smart_listing.paginate %>
+    <%= smart_listing.pagination_per_page_links %>
+<% else %>
+    <%= render partial: 'logged/shared/no_records' %>
+<% end %>

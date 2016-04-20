@@ -1,20 +1,12 @@
 class Logged::CategoriesController < LoggedController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:edit, :update, :destroy]
 
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
-  end
+    categories = Category.of(current_user)
 
-  # GET /categories/1
-  # GET /categories/1.json
-  def show
-  end
-
-  # GET /categories/new
-  def new
-    @category = Category.new
+    smart_listing_create :categories, categories, partial: "categories/list", default_sort: {id: 'asc'}
   end
 
   # GET /categories/1/edit
@@ -25,14 +17,13 @@ class Logged::CategoriesController < LoggedController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
+    @category.user = current_user
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
-        format.json { render :show, status: :created, location: @category }
+        format.html { redirect_to categories_path, notice: 'Kategória vytvorená.' }
       else
-        format.html { render :new }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.html { redirect_to categories_path, alert: @category.errors.full_messages.join('<br>') }
       end
     end
   end
@@ -42,11 +33,9 @@ class Logged::CategoriesController < LoggedController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
-        format.json { render :show, status: :ok, location: @category }
+        format.html { redirect_to categories_path, notice: 'Kategória upravená.' }
       else
-        format.html { render :edit }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.html { redirect_to categories_path, alert: @category.errors.full_messages.join('<br>') }
       end
     end
   end
@@ -56,8 +45,7 @@ class Logged::CategoriesController < LoggedController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to categories_url, notice: 'Kategória vymazaná.' }
     end
   end
 
@@ -69,6 +57,6 @@ class Logged::CategoriesController < LoggedController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name, :user_id)
+      params.require(:category).permit(:name)
     end
 end

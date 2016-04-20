@@ -1,0 +1,15 @@
+<tr>
+  <td><%= object.name %></td>
+  <td><%= object.transactions.count %></td>
+  <td>
+    <div class="pull-right">
+      <%= form_for object, html: {class: "form-inline", style: 'display: inline'} do |f| %>
+          <div class="form-group">
+            <%= f.text_field :name, require: true, class: 'form-control' %>
+            <%= f.submit 'Upraviť', class: 'btn btn-sm btn-primary' %>
+          </div>
+      <% end %>
+      <%= link_to 'Vymazať', object, method: :delete, class: "btn btn-sm btn-danger", data: {confirm: 'Ste si istý?'} %>
+    </div>
+  </td>
+</tr>

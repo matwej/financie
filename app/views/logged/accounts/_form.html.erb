@@ -13,7 +13,6 @@
       <%= f.label :notified %>
       <%= f.check_box :notified %>
     </div>
-    <%= f.hidden_field :user_id, value: current_user.id %>
     <div class="actions">
       <%= f.submit 'Uložiť', class: "btn btn-sm btn-success pull-right" %>
       <%= link_to 'Späť', accounts_path, class: "btn btn-sm btn-default pull-left" %>
