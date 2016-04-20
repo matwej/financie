@@ -1,2 +1,11 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<div class="row">
+  <div class="col-md-4">
+    <%= render partial: 'tile', locals: {name: 'Počet účtov', value: current_user.accounts.count } %>
+  </div>
+  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-4">
+
+  </div>
+</div>

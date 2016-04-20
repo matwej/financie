@@ -23,6 +23,11 @@ sk:
   logout: 'Odhlásiť'
   no_results: 'Neboli nájdené žiadne záznamy'
 
+  logs_action:
+    login: 'Prihlásenie'
+    logout: 'Odhlásenie'
+    session_expired: 'Expirovalo prihlásenie'
+
   activerecord:
     attributes:
       account:

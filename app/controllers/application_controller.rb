@@ -5,12 +5,12 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   def welcome
-
   end
 
   private
 
   def after_sign_in_path_for(resource)
+    UserLog.log(resource, :login)
     logged_root_path
   end
 

@@ -1,0 +1,26 @@
+<% unless smart_listing.empty? %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th><%= smart_listing.sortable 'Zaznamenané', :created_at %></th>
+        <th><%= smart_listing.sortable 'IP', :ip %></th>
+        <th>Akcia</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% smart_listing.collection.each do |o| %>
+          <tr>
+            <td><%= l o.created_at, format: :long %></td>
+            <td><%= o.ip %></td>
+            <td><%= t "logs_action.#{o.action}" %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= smart_listing.paginate %>
+    <%= smart_listing.pagination_per_page_links %>
+<% else %>
+    <%= render partial: 'logged/shared/no_records' %>
+<% end %>

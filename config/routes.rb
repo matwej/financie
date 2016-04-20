@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   get 'application/welcome', to: 'application#welcome', as: 'welcome'
   root 'application#welcome'
-  devise_for :users
+  devise_for :users, controllers: {
+      sessions: 'custom_devise/sessions',
+      passwords: 'custom_devise/passwords',
+      unlocks: 'custom_devise/unlocks'
+  }
 
   scope '/logged', module: 'logged' do
     get 'dashboard/index'
