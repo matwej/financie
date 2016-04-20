@@ -37,6 +37,12 @@ sk:
         notified: 'Posielanie notifikácie'
       category:
         name: 'Názov'
+      transaction:
+        account: 'Účet'
+        amount: 'Suma v EUR'
+        description: 'Účel'
+        processing_date: 'Dátum spracovania'
+        category_id: 'Kategória'
     errors:
       models:
         account:
@@ -47,6 +53,13 @@ sk:
           attributes:
             name:
               blank: ' musí byť vyplnený.'
+        transaction:
+          attributes:
+            account:
+              blank: ' musí byť vyplnený.'
+            amount:
+              blank: ' musí byť vyplnená.'
+              not_a_number: ' musí byť číslo.'
 
   views:
     pagination:
@@ -58,6 +71,11 @@ sk:
       previous: "&lsaquo; naspäť"
       next: "ďalej &rsaquo;"
       truncate: "&hellip;"
+
+  number:
+    format:
+      separator: ','
+      delimiter: ' '
 
   time:
      input:

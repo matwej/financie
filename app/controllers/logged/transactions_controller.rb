@@ -1,38 +1,32 @@
 class Logged::TransactionsController < LoggedController
-  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-
-  # GET /transactions
-  # GET /transactions.json
-  def index
-    @transactions = Transaction.all
-  end
-
-  # GET /transactions/1
-  # GET /transactions/1.json
-  def show
-  end
+  before_action :set_transaction, only: [:edit, :update, :destroy]
+  before_action :set_transaction_account, only: [:edit, :update, :destroy]
 
   # GET /transactions/new
   def new
+    set_and_auth_account params[:account_id]
+
     @transaction = Transaction.new
   end
 
   # GET /transactions/1/edit
   def edit
+
   end
 
   # POST /transactions
   # POST /transactions.json
   def create
+    set_and_auth_account params[:transaction][:owner_id]
+
+    byebug
     @transaction = Transaction.new(transaction_params)
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
+        format.html { redirect_to account_path(@account.id), notice: 'Transakcia úspešne vytvorená.' }
       else
         format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +36,9 @@ class Logged::TransactionsController < LoggedController
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
-        format.json { render :show, status: :ok, location: @transaction }
+        format.html { redirect_to account_path(@account.id), notice: 'Transakcia úspešne upravená.' }
       else
         format.html { render :edit }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,8 +48,7 @@ class Logged::TransactionsController < LoggedController
   def destroy
     @transaction.destroy
     respond_to do |format|
-      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to :back, notice: 'Transakcia úspešne vymazaná.' }
     end
   end
 
@@ -69,6 +60,25 @@ class Logged::TransactionsController < LoggedController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:account, :processing_date, :description, :amount, :category_id, :account_id)
+      delocalize_params = {:amount => :number, :processing_date => :date}
+      params.require(:transaction)
+          .permit(:account, :processing_date, :description, :amount, :category_id, :owner_id)
+          .delocalize(delocalize_params)
+    end
+
+    def set_and_auth_account(id)
+      @account = Account.find(id)
+      if @account.user != current_user
+        flash[:error] = 'Nemáte oprávnenie manipulácie s týmto účtom'
+        redirect_to accounts_path
+      end
+    end
+
+    def set_transaction_account
+      @account = @transaction.owner
+      if @transaction.owner.user != current_user
+        flash[:error] = 'Nemáte oprávnenie manipulácie s týmto účtom'
+        redirect_to accounts_path
+      end
     end
 end

@@ -1,41 +1,49 @@
 <%= form_for(@transaction) do |f| %>
-  <% if @transaction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+    <% if @transaction.errors.any? %>
+        <p class="alert alert-danger">
+          <% @transaction.errors.full_messages.each do |message| %>
+              <%= message %><br>
+          <% end %>
+        </p>
+    <% end %>
 
-      <ul>
-      <% @transaction.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <%= render partial: 'logged/shared/input', locals: {value: :account, form: f, required: true} %>
+    <%= render partial: 'logged/shared/number_input', locals: {
+        value: :amount,
+        form: f,
+        required: true,
+        number: (@transaction.amount? ? number_with_delimiter(@transaction.amount, delimiter: ' ', separator: ",") : nil)}
+    %>
+    <div class="form-group">
+      <%= f.label :processing_date, class: "control-label" %>
+      <%= f.text_field :processing_date,
+                       value: (@transaction.processing_date ? l(@transaction.processing_date, format: :short) : ""),
+                       class: "form-control datepicker" %>
     </div>
-  <% end %>
+    <%= render partial: 'logged/shared/input', locals: {value: :description, form: f} %>
+    <div class="form-group">
+      <%= f.label :category_id, class: "control-label" %>
+      <%= f.collection_select :category_id, current_user.categories, :id, :name, {include_blank: 'Žiadna'}, {class: "form-control"} %>
+    </div>
 
-  <div class="field">
-    <%= f.label :account %><br>
-    <%= f.text_field :account %>
-  </div>
-  <div class="field">
-    <%= f.label :processing_date %><br>
-    <%= f.datetime_select :processing_date %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :category_id %><br>
-    <%= f.text_field :category_id %>
-  </div>
-  <div class="field">
-    <%= f.label :account_id %><br>
-    <%= f.text_field :account_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.hidden_field :owner_id, value: @account.id %>
+    <div class="actions">
+      <%= f.submit 'Uložiť', class: "btn btn-sm btn-success pull-right" %>
+      <%= link_to 'Späť', account_path(@account.id), class: "btn btn-sm btn-default pull-left" %>
+    </div>
 <% end %>
+
+<script>
+  $(document).ready(function () {
+    $('.datepicker').datepicker({
+      format: "dd.mm.yyyy",
+      autoclose: true,
+      weekStart: 1,
+      todayBtn: 'linked',
+      language: "sk",
+      onSelect: function () {
+        $(this).change();
+      }
+    });
+  });
+</script>

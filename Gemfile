@@ -31,6 +31,10 @@ gem 'devise'
 
 gem 'smart_listing'
 
+gem 'bootstrap-datepicker-rails'
+
+gem 'delocalize'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

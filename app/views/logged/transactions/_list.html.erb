@@ -3,9 +3,9 @@
       <thead>
       <tr>
         <th>Účet</th>
-        <th>Suma</th>
-        <th>Dátum</th>
-        <th>Popis</th>
+        <th><%= smart_listing.sortable 'Suma', :amount %></th>
+        <th><%= smart_listing.sortable 'Dátum spracovania', :processing_date %></th>
+        <th>Účel</th>
         <th>Typ</th>
         <th></th>
       </tr>
@@ -14,8 +14,8 @@
       <% smart_listing.collection.each do |o| %>
           <tr>
             <td><%= o.account %></td>
-            <td><%= euro_currency o.amount %></td>
-            <td><%= o.processing_date.nil? ? "" : l(o.processing_date) %></td>
+            <td><span class="<%= o.amount >= 0 ? "text-success" : "text-danger" %>"><%= euro_currency o.amount %></span></td>
+            <td><%= o.processing_date.nil? ? "" : l(o.processing_date, format: :short) %></td>
             <td><%= truncate o.description, length: 20 %></td>
             <td><%= o.category.try(:name) %></td>
             <td>

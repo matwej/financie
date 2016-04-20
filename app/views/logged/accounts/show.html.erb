@@ -7,8 +7,8 @@
       </div>
       <div class="col-md-5">
         <div class="pull-right">
-          <%= link_to 'Nová transakcia', new_transaction_path, class: "btn btn-sm btn-primary" %>
-          <%= link_to 'Upraviť účet', edit_account_path, class: "btn btn-sm btn-primary" %>
+          <%= link_to 'Nová transakcia', new_transaction_path(account_id: @account.id), class: "btn btn-sm btn-primary" %>
+          <%= link_to 'Upraviť účet', edit_account_path, remote: true, class: "btn btn-sm btn-primary" %>
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
   <div class="panel-body">
     <div class="panel panel-default">
       <div class="panel-body">
-        <strong>Stav celkom: </strong><%= number_to_human @account.sum_of_transactions %><br>
+        <strong>Stav celkom: </strong><%= euro_currency @account.sum_of_transactions %><br>
         <strong>Kritická suma: </strong><%= number_to_human @account.warning_limit %><br>
         <strong>E-mail notifikácia: </strong><%= @account.notified ? 'Áno' : 'Nie' %>
       </div>

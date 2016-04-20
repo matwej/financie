@@ -15,4 +15,5 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require smart_listing
+//= require bootstrap-datepicker
 //= require_tree .
