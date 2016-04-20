@@ -1,24 +1,26 @@
-<p id="notice"><%= notice %></p>
-<%# TODO dokoncit zobrazenie %>
-<p>
-  <strong>Name:</strong>
-  <%= @account.name %>
-</p>
-
-<p>
-  <strong>Warning limit:</strong>
-  <%= @account.warning_limit %>
-</p>
-
-<p>
-  <strong>Notified:</strong>
-  <%= @account.notified %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @account.user %>
-</p>
-
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-7">
+        <%= link_to 'Späť', accounts_path, class: "btn btn-default" %>
+        <h4 style="display: inline">Prehľad účtu <%= @account.name %></h4>
+      </div>
+      <div class="col-md-5">
+        <div class="pull-right">
+          <%= link_to 'Nová transakcia', new_transaction_path, class: "btn btn-sm btn-primary" %>
+          <%= link_to 'Upraviť účet', edit_account_path, class: "btn btn-sm btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <strong>Stav celkom: </strong><%= number_to_human @account.sum_of_transactions %><br>
+        <strong>Kritická suma: </strong><%= number_to_human @account.warning_limit %><br>
+        <strong>E-mail notifikácia: </strong><%= @account.notified ? 'Áno' : 'Nie' %>
+      </div>
+    </div>
+    <%= smart_listing_render(:transactions) %>
+  </div>
+</div>

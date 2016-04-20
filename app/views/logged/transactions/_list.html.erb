@@ -1,0 +1,36 @@
+<% unless smart_listing.empty? %>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Účet</th>
+        <th>Suma</th>
+        <th>Dátum</th>
+        <th>Popis</th>
+        <th>Typ</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% smart_listing.collection.each do |o| %>
+          <tr>
+            <td><%= o.account %></td>
+            <td><%= euro_currency o.amount %></td>
+            <td><%= o.processing_date.nil? ? "" : l(o.processing_date) %></td>
+            <td><%= truncate o.description, length: 20 %></td>
+            <td><%= o.category.try(:name) %></td>
+            <td>
+              <div class="pull-right">
+                <%= link_to 'Upraviť', edit_transaction_path(o), remote: true, class: "btn btn-sm btn-primary" %>
+                <%= link_to 'Vymazať', o, method: :delete, class: "btn btn-sm btn-danger", data: {confirm: 'Ste si istý?'} %>
+              </div>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <%= smart_listing.paginate %>
+    <%= smart_listing.pagination_per_page_links %>
+<% else %>
+    <%= render partial: 'logged/shared/no_records' %>
+<% end %>
