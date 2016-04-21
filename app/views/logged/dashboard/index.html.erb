@@ -7,8 +7,8 @@
   <div class="col-md-6">
     <%= render partial: 'tile', locals: {name: 'Celkový počet transakcii', value: current_user.transactions.count } %>
     <% max = current_user.max_value_transaction %>
-    <%= render partial: 'tile', locals: {name: 'Najvyšší príjem', value: "#{max.account}: #{euro_currency max.amount}" } %>
+    <%= render partial: 'tile', locals: {name: 'Najvyšší príjem', value: "#{max.try(:account)}: #{euro_currency max.try(:amount)}" } %>
     <% min = current_user.min_value_transaction %>
-    <%= render partial: 'tile', locals: {name: 'Najvyšší výdaj', value: "#{min.account}: #{euro_currency min.amount}" } %>
+    <%= render partial: 'tile', locals: {name: 'Najvyšší výdaj', value: "#{min.try(:account)}: #{euro_currency min.try(:amount)}" } %>
   </div>
 </div>
