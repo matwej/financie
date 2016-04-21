@@ -59,5 +59,6 @@ end
 
 group :production do
   gem 'puma'
+  gem 'mailjet'
 end
 

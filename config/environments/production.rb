@@ -80,4 +80,6 @@ Rails.application.configure do
   config.devise_usage_log_level = :all
 
   config.secret_key_base = ENV["SECRET_KEY_BASE"]
+
+  config.action_mailer.delivery_method = :mailjet
 end
