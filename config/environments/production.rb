@@ -78,4 +78,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.devise_usage_log_level = :all
+
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
 end
