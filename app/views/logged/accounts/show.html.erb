@@ -17,7 +17,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <strong>Stav celkom: </strong><%= euro_currency @account.sum_of_transactions %><br>
-        <strong>Kritická suma: </strong><%= number_to_human @account.warning_limit %><br>
+        <strong>Kritická suma: </strong><%= euro_currency @account.warning_limit %><br>
         <strong>E-mail notifikácia: </strong><%= @account.notified ? 'Áno' : 'Nie' %>
       </div>
     </div>
