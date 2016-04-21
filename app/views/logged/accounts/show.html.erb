@@ -41,15 +41,6 @@
   </div>
 </div>
 <script>
-
-  function resetAllSiblings(button) {
-    $(button).parent().children('.form-control').each(function () {
-      console.log($(this));
-      $(this).val('');
-      $(this).trigger('change');
-    });
-  }
-
   $(document).ready(function () {
     datepicker_init();
   });

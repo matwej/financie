@@ -1,6 +1,11 @@
 <tr>
   <td><%= object.name %></td>
-  <td><%= object.transactions.count %></td>
+  <td><%= object.transactions.size %></td>
+  <%
+    # tato tocka je tu na to aby sa nevyvolal DB call, ale pracovalo sa s included asociaciou
+    # zvyknem to pouzivat na n+1 issues, aj ked mozno tu je to zbytocne kladivo (nerobilo by to vela db calls)
+  %>
+  <td><%= euro_currency object.transactions.map{|t| t.amount}.inject(0, &:+) %></td>
   <td>
     <div class="pull-right">
       <%= form_for object, html: {class: "form-inline", style: 'display: inline'} do |f| %>

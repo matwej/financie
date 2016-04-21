@@ -4,9 +4,12 @@ class Logged::CategoriesController < LoggedController
   # GET /categories
   # GET /categories.json
   def index
-    categories = Category.of(current_user)
+    categories = Category.of(current_user).includes(:transactions)
 
-    smart_listing_create :categories, categories, partial: "categories/list", default_sort: {id: 'asc'}
+    categories = categories.transactions_from(params.delocalize(from_filter: :date)[:from_filter]) unless params[:from_filter].blank?
+    categories = categories.transactions_to(params.delocalize(to_filter: :date)[:to_filter]) unless params[:to_filter].blank?
+
+    smart_listing_create :categories, categories, partial: "categories/list"
   end
 
   # GET /categories/1/edit

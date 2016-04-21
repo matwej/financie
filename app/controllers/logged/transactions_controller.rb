@@ -19,7 +19,6 @@ class Logged::TransactionsController < LoggedController
   def create
     set_and_auth_account params[:transaction][:owner_id]
 
-    byebug
     @transaction = Transaction.new(transaction_params)
 
     respond_to do |format|

@@ -18,6 +18,14 @@
 //= require bootstrap-datepicker
 //= require_tree .
 
+function resetAllSiblings(button) {
+    $(button).parent().children('.form-control').each(function () {
+        console.log($(this));
+        $(this).val('');
+        $(this).trigger('change');
+    });
+}
+
 var datepicker_init = function () {
     $('.datepicker').datepicker({
         format: "dd.mm.yyyy",

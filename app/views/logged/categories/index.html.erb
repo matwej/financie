@@ -9,6 +9,21 @@
           <%= f.submit 'Vytvoriť', class: 'btn btn-sm btn-primary' %>
         </div>
     <% end %>
+    <%= smart_listing_controls_for(:categories, {class: "form-inline text-right pull-left"}) do %>
+        <strong>Len obdobie:</strong>
+        <%= text_field_tag :from_filter, '', class: "form-control datepicker", placeholder: "Od", autocomplete: :off, size: 10 %>
+        <%= text_field_tag :to_filter, '', class: "form-control datepicker", placeholder: "Do", autocomplete: :off, size: 10 %>
+        <button class="btn btn-primary" onclick="resetAllSiblings(this);">
+          <i class="fa fa-times"></i>
+        </button>
+    <% end %>
+
     <%= smart_listing_render(:categories) %>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    datepicker_init();
+  });
+</script>
