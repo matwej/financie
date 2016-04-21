@@ -34,7 +34,7 @@ class Transaction < ActiveRecord::Base
 
   def notify(account)
     if account.notified && account.warning_limit >= account.sum_of_transactions
-      UserMailer.warning_limit_email(account.user, account).deliver_now
+      UserMailer.warning_limit_email(account.user, account).deliver_now!
     end
   end
 end
