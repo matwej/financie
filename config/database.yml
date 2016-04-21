@@ -85,6 +85,8 @@ test:
 #
 production:
   <<: *default
-  database: innovatrics_production
-  username: innovatrics
+  host: ec2-46-137-125-22.eu-west-1.compute.amazonaws.com
+  port: 5432
+  database: dakpb7ct42bqgk
+  username: dfyjoqatgaqray
   password: <%= ENV['INNOVATRICS_DATABASE_PASSWORD'] %>
