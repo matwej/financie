@@ -44,6 +44,11 @@ sk:
         description: 'Účel'
         processing_date: 'Dátum spracovania'
         category_id: 'Kategória'
+      user:
+        email: 'E-mail'
+        password: 'Heslo'
+        password_confirmation: 'Potvrdenie hesla'
+        remember_me: 'Zapamätať'
     errors:
       models:
         account:
