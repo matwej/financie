@@ -17,3 +17,16 @@
 //= require smart_listing
 //= require bootstrap-datepicker
 //= require_tree .
+
+var datepicker_init = function () {
+    $('.datepicker').datepicker({
+        format: "dd.mm.yyyy",
+        autoclose: true,
+        weekStart: 1,
+        todayBtn: 'linked',
+        language: "sk",
+        onSelect: function () {
+            $(this).change();
+        }
+    });
+};

@@ -15,7 +15,7 @@
           <tr>
             <td><%= o.account %></td>
             <td><span class="<%= o.amount >= 0 ? "text-success" : "text-danger" %>"><%= euro_currency o.amount %></span></td>
-            <td><%= o.processing_date.nil? ? "" : l(o.processing_date, format: :short) %></td>
+            <td><%= o.processing_date.nil? ? "" : l(o.processing_date) %></td>
             <td><%= truncate o.description, length: 20 %></td>
             <td><%= o.category.try(:name) %></td>
             <td>

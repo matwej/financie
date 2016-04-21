@@ -22,6 +22,7 @@
 sk:
   logout: 'Odhlásiť'
   no_results: 'Neboli nájdené žiadne záznamy'
+  search: 'Hľadať'
 
   logs_action:
     login: 'Prihlásenie'

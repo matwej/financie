@@ -11,7 +11,9 @@ class Logged::AccountsController < LoggedController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-    smart_listing_create :transactions, @account.transactions, partial: "transactions/list"
+    transactions = Transaction.apply_filters @account.transactions, params.delocalize(date_params_config)
+
+    smart_listing_create :transactions, transactions, partial: "transactions/list"
   end
 
   # GET /accounts/new
@@ -68,5 +70,9 @@ class Logged::AccountsController < LoggedController
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
       params.require(:account).permit(:name, :warning_limit, :notified)
+    end
+
+    def date_params_config
+      {from_filter: :date, to_filter: :date}
     end
 end
