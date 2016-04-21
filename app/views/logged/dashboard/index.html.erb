@@ -1,11 +1,14 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-6">
     <%= render partial: 'tile', locals: {name: 'Počet účtov', value: current_user.accounts.count } %>
+    <%= render partial: 'tile', locals: {name: 'Celková suma na účtoch', value: euro_currency(current_user.transactions.sum(:amount)) } %>
+    <%= render partial: 'tile', locals: {name: 'Počet kategórii', value: current_user.categories.count } %>
   </div>
-  <div class="col-md-4">
-
-  </div>
-  <div class="col-md-4">
-
+  <div class="col-md-6">
+    <%= render partial: 'tile', locals: {name: 'Celkový počet transakcii', value: current_user.transactions.count } %>
+    <% max = current_user.max_value_transaction %>
+    <%= render partial: 'tile', locals: {name: 'Najvyšší príjem', value: "#{max.account}: #{euro_currency max.amount}" } %>
+    <% min = current_user.min_value_transaction %>
+    <%= render partial: 'tile', locals: {name: 'Najvyšší výdaj', value: "#{min.account}: #{euro_currency min.amount}" } %>
   </div>
 </div>

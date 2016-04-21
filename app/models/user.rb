@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :categories, dependent: :destroy
   has_many :accounts, dependent: :destroy
+  has_many :transactions, through: :accounts
 
   def self.valid_user?(resource)
     resource && resource.kind_of?(User) && resource.valid?
@@ -22,5 +23,13 @@ class User < ActiveRecord::Base
 
   def update_unique_session_id!(unique_session_id)
     self.update_attribute(:unique_session_id, unique_session_id)
+  end
+
+  def max_value_transaction
+    self.transactions.order("amount DESC").first
+  end
+
+  def min_value_transaction
+    self.transactions.order("amount ASC").first
   end
 end
