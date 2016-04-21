@@ -35,6 +35,8 @@ gem 'bootstrap-datepicker-rails'
 
 gem 'delocalize'
 
+gem 'mailjet'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -59,6 +61,5 @@ end
 
 group :production do
   gem 'puma'
-  gem 'mailjet'
 end
 
