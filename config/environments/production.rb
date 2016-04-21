@@ -82,4 +82,7 @@ Rails.application.configure do
   config.secret_key_base = ENV["SECRET_KEY_BASE"]
 
   config.action_mailer.delivery_method = :mailjet
+  config.action_mailer.default_options = {
+      from: 'notifications@financie.herokuapp.com'
+  }
 end
