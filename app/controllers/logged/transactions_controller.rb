@@ -22,7 +22,7 @@ class Logged::TransactionsController < LoggedController
     @transaction = Transaction.new(transaction_params)
 
     respond_to do |format|
-      if @transaction.save
+      if @transaction.save_and_notify
         format.html { redirect_to account_path(@account.id), notice: 'Transakcia úspešne vytvorená.' }
       else
         format.html { render :new }
@@ -34,7 +34,7 @@ class Logged::TransactionsController < LoggedController
   # PATCH/PUT /transactions/1.json
   def update
     respond_to do |format|
-      if @transaction.update(transaction_params)
+      if @transaction.update_and_notify(transaction_params)
         format.html { redirect_to account_path(@account.id), notice: 'Transakcia úspešne upravená.' }
       else
         format.html { render :edit }
