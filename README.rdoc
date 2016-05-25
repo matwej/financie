@@ -2,4 +2,4 @@
 
 for imports:
 - cron job with interval, commands:
-* cd <app_root> && rake imports:transactions
+    * cd <app_root> && rake imports:transactions
